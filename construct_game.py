@@ -27,9 +27,20 @@ state = GameState()
 
 centerLetter_button = Button(27)
 outer_letter_1 = Button(22)
+outer_letter_2 = Button(23)
+outer_letter_3 = Button(24)
+outer_letter_4 = Button(25)
+outer_letter_5 = Button(21)
+outer_letter_6 = Button(20)
+
 
 centerLetter_button.when_pressed = lambda: state.add_letter(centerLetter)
 outer_letter_1.when_pressed = lambda: state.add_letter(outerLetters[0])
+outer_letter_2.when_pressed = lambda: state.add_letter(outerLetters[1])
+outer_letter_3.when_pressed = lambda: state.add_letter(outerLetters[2])
+outer_letter_4.when_pressed = lambda: state.add_letter(outerLetters[3])
+outer_letter_5.when_pressed = lambda: state.add_letter(outerLetters[4])
+outer_letter_6.when_pressed = lambda: state.add_letter(outerLetters[5])
 
 pause()
 
