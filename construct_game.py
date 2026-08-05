@@ -11,7 +11,7 @@ with open('data/'+game_data_file_name) as game_data:
     centerLetter = data['today']['centerLetter']
     outerLetters = data['today']['outerLetters']
     answers = data['today']['answers']
-    pangrams = data['today']['pangram']
+    pangrams = data['today']['pangrams']
 
 class GameState:
     def __init__(self):
