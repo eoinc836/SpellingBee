@@ -7,6 +7,7 @@ from signal import pause
 scrape_bee('https://www.nytimes.com/puzzles/spelling-bee')
 game_data_file_name = datetime.today().strftime('%Y-%m-%d') + '.json'
 global word
+word=""
 with open('data/'+game_data_file_name) as game_data:
     data = json.load(game_data)
     centerLetter = data['today']['centerLetter']
