@@ -17,6 +17,8 @@ class GameState:
     def __init__(self):
         self.word = ""
         self.score = 0
+        self.guessed_words = []
+
     def add_letter(self, letter):
         self.word += letter
         print(self.word)
@@ -26,15 +28,19 @@ class GameState:
         print('Cleared current selection')
 
     def guess(self):
-        if self.word in answers:
+        if self.word in answers and self.word not in self.guessed_words:
+            self.guessed_words.append(self.word)
             if len(self.word) == 4:
                 points = 1
             elif self.word not in pangrams:
-                points = len(self.word) - 3
+                points = len(self.word)
+            elif self.word in pangrams:
+                points = len(self.word) + 7
             self.score += points
             print("Correct. Your score is now", self.score)
         else:
             print("Not a valid word",self.word)
+        self.clear()
 
 
 state = GameState()
