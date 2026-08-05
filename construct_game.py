@@ -23,6 +23,7 @@ class GameState:
 
     def clear(self):
         self.word = ""
+        print('Cleared current selection')
 
     def guess(self):
         if self.word in answers:
