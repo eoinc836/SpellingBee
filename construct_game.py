@@ -29,9 +29,9 @@ centerLetter_button = Button(27)
 outer_letter_1 = Button(22)
 outer_letter_2 = Button(23)
 outer_letter_3 = Button(24)
-outer_letter_4 = Button(25)
-outer_letter_5 = Button(21)
-outer_letter_6 = Button(20)
+outer_letter_4 = Button(21)
+outer_letter_5 = Button(20)
+outer_letter_6 = Button(25)
 
 
 centerLetter_button.when_pressed = lambda: state.add_letter(centerLetter)
