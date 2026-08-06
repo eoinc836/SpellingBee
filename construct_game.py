@@ -65,6 +65,29 @@ outer_letter_6.when_pressed = lambda: state.add_letter(outerLetters[5])
 clear_button.when_pressed = lambda: state.clear()
 enter_button.when_pressed = lambda: state.guess()
 
+from PIL import Image, ImageDraw, ImageFont
+import math
+
+def hex_at(d, cx, cy, r, fill, outline="black"):
+    pts = [(cx + r * math.cos(math.radians(60 * i - 90)),
+            cy + r * math.sin(math.radians(60 * i - 90))) for i in range(6)]
+    d.polygon(pts, fill=fill, outline=outline)
+
+img = Image.new("RGB", (240, 240), "black")
+d = ImageDraw.Draw(img)
+font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 26)
+
+hex_at(d, 120, 120, 34, "#f7da21")                    # centre letter
+d.text((120, 120), centerLetter.upper(), font=font, fill="black", anchor="mm")
+
+for i, letter in enumerate(outerLetters):
+    a = math.radians(60 * i)
+    x, y = 120 + 62 * math.cos(a), 120 + 62 * math.sin(a)
+    hex_at(d, x, y, 34, "#e6e6e6")
+    d.text((x, y), letter.upper(), font=font, fill="black", anchor="mm")
+
+tft.blit(to_rgb565(img))
+
 pause()
 
 
