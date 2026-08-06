@@ -3,6 +3,11 @@ from datetime import datetime
 import json
 from gpiozero import Button
 from signal import pause
+from start_screen import GC9A01
+from image_tools import to_rgb565, prepare
+from PIL import Image, ImageDraw, ImageFont
+import math
+
 
 scrape_bee('https://www.nytimes.com/puzzles/spelling-bee')
 game_data_file_name = datetime.today().strftime('%Y-%m-%d') + '.json'
@@ -44,6 +49,7 @@ class GameState:
 
 
 state = GameState()
+tft = GC9A01()
 
 centerLetter_button = Button(27)
 outer_letter_1 = Button(22)
@@ -65,8 +71,7 @@ outer_letter_6.when_pressed = lambda: state.add_letter(outerLetters[5])
 clear_button.when_pressed = lambda: state.clear()
 enter_button.when_pressed = lambda: state.guess()
 
-from PIL import Image, ImageDraw, ImageFont
-import math
+
 
 def hex_at(d, cx, cy, r, fill, outline="black"):
     pts = [(cx + r * math.cos(math.radians(60 * i - 90)),
@@ -88,6 +93,11 @@ for i, letter in enumerate(outerLetters):
 
 tft.blit(to_rgb565(img))
 
-pause()
+try:
+    pause()
+except KeyboardInterrupt:
+    pass
+finally:
+    tft.close()
 
 
